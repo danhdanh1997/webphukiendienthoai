@@ -1,6 +1,6 @@
 <?php
 	$sql="select * from sanpham where idsanpham='$_GET[id]'";
-	$num=mysqli_query($sql);
+	$num=mysqli_query($conn,$sql);
 	$dong=mysqli_fetch_array($num);
 ?>
 	<div class="tieude">Chi tiết sản phẩm</div>
@@ -9,7 +9,7 @@
                     	<div class="box_hinhanh">
                         	<img src="admincp/modules/quanlysanpham/uploads/<?php echo $dong['hinhanh'] ?>" data-zoom-image="imgs/op-lung-sony-z3-pelosi-50.jpg"  width="200" height="200" />
                             <?php
-                            $sql_gallery=mysqli_query('select * from gallery where id_sp="$_GET[id]" limit 3');							
+                            $sql_gallery=mysqli_query($conn,'select * from gallery where id_sp="$_GET[id]" limit 3');							
 							$row_gallery=mysqli_num_rows($sql_gallery);
 							
 							?>
@@ -54,7 +54,7 @@
                             <li rel="panel3">Khách hàng đánh giá</li>
                         </ul>
                         <?php
-					$sql_thongtinsp=mysqli_query("select * from sanpham where idsanpham='$_GET[id]'");
+					$sql_thongtinsp=mysqli_query($conn,"select * from sanpham where idsanpham='$_GET[id]'");
 					$count_thongtinsp=mysqli_num_rows($sql_thongtinsp);
 					if($count_thongtinsp>0){
 					$dong_thongtinsp=mysqli_fetch_array($sql_thongtinsp);
@@ -71,7 +71,7 @@
 				   ?>
                           <div id="panel2" class="panel">
                              <?php
-					$sql_hinhanhsp=mysqli_query("select * from gallery where id_sp='$_GET[id]'");
+					$sql_hinhanhsp=mysqli_query($conn,"select * from gallery where id_sp='$_GET[id]'");
 					$count=mysqli_num_rows($sql_hinhanhsp);
 					if($count>0){
 					while($dong_hinhanhsp=mysqli_fetch_array($sql_hinhanhsp)){
@@ -94,7 +94,7 @@
                     </div>
                    <?php
 				   	$sql_lienquan="select * from sanpham where loaisp='$_GET[idloaisp]' and sanpham.idsanpham<>$_GET[id] ";
-					$row_lienquan=mysqli_query($sql_lienquan);
+					$row_lienquan=mysqli_query($conn,$sql_lienquan);
 					$count_lienquan=mysqli_num_rows($row_lienquan);
 					if($count_lienquan>0){
 				   ?>
